@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal fade" id="modalProfilePicture" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+            {{ form_start(form, {'action': url('addPicture', {userID : userID}),'method': 'POST'}) }}
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Changer votre photo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+
+            {{ form_errors(form) }}
+            {{ form_errors(form.picture) }}
+            {{ form_widget(form.picture, {'attr': {'style': 'margin-left:3%;'}}) }}
+            <p>&nbsp;</p>
+            <span class="pull-right center" style="align-items: center; padding-left: 10%;">
+                {{ form_widget(form.Modifier, {'label': 'Modifier', 'translation_domain': 'messages', 'attr': {'class': 'btn btn-primary'}}) }}
+            </span>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            <p>{{ form_rest(form) }}</p>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+{% extends 'layoutadmin.html.twig' %}
+
+{% block title %} {{ parent() }} - Administration - Les contacts {% endblock %}
+{% block header %} {{ parent() }} {% endblock %}
+
+{% block body %}
+    <h1 class="center">Les contacts</h1><br><br>
+    <div class="row container-fluid">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 center">
+            {% for contact in contacts %}
+                <div class="alert alert-primary">
+                    <strong style="color: #1f3955;">{{ contact.name }}&nbsp;{{ contact.firstName }} ( {{ contact.mail }} - {{ contact.phoneNumber }} ) </strong> vous a contacté :
+                    <br>
+                    <strong>Objet : </strong>{{ contact.subject }}<br>
+                    <strong>Contenu du message : </strong> {{ contact.content }}<br>
+                </div>
+                <div>
+                    <a href="{{ url('admin_contact_confirm_delete', {'id': contact.id}) }}">Supprimer le contact</a>
+                </div>
+                <br><br>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

@@ -1,0 +1,8 @@
+<h3>Vous avez reçu un nouveau contact !</h3>
+
+<div><b>Email : </b> {{ contact.mail }}</div>
+<div><b>Sujet : </b> {{ contact.subject }}</div><br>
+<div><b>Contenu du message : </b> {{ contact.content }}</div><br>
+
+Vous pouvez le voir en cliquant <a href="{{ url('admin_contact') }}">ici</a>.
+

@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+
+{% block title %} {{ parent() }} - Proposez un repas{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center">Proposer un repas</h1>
+    <div class="container-fluid row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form(form) }}
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+{#    TODO : Soigner le front   #}
+
+    <script>
+        // Using this tutorial for autocomplete address : https://www.youtube.com/watch?v=Rpzp0yCAmq4
+        function activatePlacesSearch(){
+            var options = { componentRestrictions: { country: "fr"} };
+            var input = document.getElementById("appbundle_meal_adress");
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+        }
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuZviasKN0VON99Nz4I8b_tu6YZDcmrsw&libraries=places&callback=activatePlacesSearch&libraries=places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock %}

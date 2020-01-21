@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Home'Eat {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block stylesheets %}{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    {% stylesheets 'bundles/app/css/*' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="#" />
+
+{#    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>#}
+
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+{% block header %}
+
+    <nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" style="" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('homepage') }}"><span>H</span>ome'Eat</a>
+            <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav nav ml-auto">
+                    <li class="nav-item"><a href="{{ url('researchMeal') }}" class="nav-link"><span>Rechercher un repas</span></a></li>
+                    <li class="nav-item"><a href="{{ url('createMeal') }}" class="nav-link"><span>Proposer un repas</span></a></li>
+                    {% if app.user is null %}<li class="nav-item"><a href="{{ url('fos_user_security_login') }}" class="nav-link"><span>Login</span></a></li>{% else %}
+                    <li class="nav-item"><a href="{{ url('fos_user_profile_show') }}" class="nav-link"><span>Profil</span></a></li>{% endif %}
+                    <li class="nav-item"><a href="#" class="nav-link"><span>Autre lien</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>Autre lien</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% for type, messages in app.session.flashbag.all() %}
+        <br><br>
+        {% for message in messages %}
+            <div class="row container-fluid" >
+                <div class="col-md-2"></div>
+                <div class="center alert alert-{{ type }} col-md-2">
+                    {{ message }}
+                    </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+
+{% block footer %}
+
+ {#   <section class="ftco-section" id="blog-section">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-5">
+                <div class="col-md-7 heading-section text-center ftco-animate">
+                    <h1 class="big big-2">Blog</h1>
+                    <h2 class="mb-4">Our Blog</h2>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                </div>
+            </div>
+            <div class="row d-flex">
+                <div class="col-md-4 d-flex ftco-animate">
+                    <div class="blog-entry justify-content-end">
+                        {% image '@AppBundle/Resources/public/images/image_1.jpg' %}
+                            <a href="#" class="block-20" style="background-image: url('{{ asset_url }}')"></a>
+                        {% endimage %}
+                        <div class="text mt-3 float-right d-block">
+                            <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
+                            <div class="d-flex align-items-center mb-3 meta">
+                                <p class="mb-0">
+                                    <span class="mr-2">Sept. 12, 2019</span>
+                                    <a href="#" class="mr-2">Admin</a>
+                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+                                </p>
+                            </div>
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex ftco-animate">
+                    <div class="blog-entry justify-content-end">
+                        {% image '@AppBundle/Resources/public/images/image_2.jpg' %}
+                            <a href="#" class="block-20" style="background-image: url('{{ asset_url }}')"></a>
+                        {% endimage %}
+                        <div class="text mt-3 float-right d-block">
+                            <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
+                            <div class="d-flex align-items-center mb-3 meta">
+                                <p class="mb-0">
+                                    <span class="mr-2">Sept. 12, 2019</span>
+                                    <a href="#" class="mr-2">Admin</a>
+                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+                                </p>
+                            </div>
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex ftco-animate">
+                    <div class="blog-entry">
+                        {% image '@AppBundle/Resources/public/images/image_3.jpg' %}
+                            <a href="#" class="block-20" style="background-image: url('{{ asset_url }}')"></a>
+                        {% endimage %}
+                        <div class="text mt-3 float-right d-block">
+                            <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
+                            <div class="d-flex align-items-center mb-3 meta">
+                                <p class="mb-0">
+                                    <span class="mr-2">Sept. 12, 2019</span>
+                                    <a href="#" class="mr-2">Admin</a>
+                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+                                </p>
+                            </div>
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+#}
+
+    <footer class="ftco-footer ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">À propos</h2>
+                        <p>Avec Home'Eat, mange comme chez maman !</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-4">
+                        <h2 class="ftco-heading-2">Liens</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Accueil</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Rechercher un repas</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Proposer un repas</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>FAQ</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Services</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Profil</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Mentions légales</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>CGU</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>CGV</a></li>
+                            <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Supprimer son compte</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Une question ?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon icon-map-marker"></span><span class="text">9 Rue Charles Fourier, Évry, 91000, France</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+33666777888</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">contact@homeeat.fr</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Home'Eat &copy;<script>document.write(new Date().getFullYear());</script> Tous droits réservés | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('bundles/app/js/jquery.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/jquery-migrate-3.0.1.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/popper.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/bootstrap.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/jquery.easing.1.3.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/jquery.waypoints.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/jquery.stellar.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/owl.carousel.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/jquery.magnific-popup.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/aos.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/jquery.animateNumber.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/scrollax.min.js') }}" type="application/javascript"></script>
+    <script src="{{ asset('bundles/app/js/main.js') }}" type="application/javascript"></script>
+{% endblock %}
+</body>
+
+
+</html>

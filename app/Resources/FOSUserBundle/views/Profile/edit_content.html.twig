@@ -1,0 +1,31 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<br><br>
+<div class="row container-fluid">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+        <h2>Modifier vos informations</h2>
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit sizeText3' } }) }}
+        {{ form_errors(form) }}
+        {{ form_rest(form) }}
+
+{#        {{ form_label(form.firstName, 'Pseudo') }}<br>#}
+{#        {{ form_widget(form.firstName) }}#}
+{#        {{ form_errors(form.firstName) }}<br>#}
+
+{#        {{ form_label(form.lastName, 'Adresse mail') }}<br>#}
+{#        {{ form_widget(form.lastName) }}#}
+{#        {{ form_errors(form.lastName) }}<br>#}
+
+{#        {{ form_label(form.phoneNumber, 'Entrez votre mot de passe pour valider les modifications') }}<br>#}
+{#        {{ form_widget(form.phoneNumber) }}#}
+{#        {{ form_errors(form.phoneNumber) }}#}
+
+        <br><br>
+        <div>
+            <input type="submit" value="{{ 'Modifier'|trans }}" class="form-control btn-primary" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>

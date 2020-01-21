@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} - Partenaires {% endblock %}
+{% block header %} {{ parent() }} {% endblock %}
+
+{% block body %}
+    <div class="row container-fluid">
+        <div class="col-md-12 text-center">
+            Félicitation {{ user.username }} ! Votre compte est désormais activé. <br>
+            Vous pouvez retourner sur l'application et vous connecter.
+        </div>
+    </div>
+    <br><br><br>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

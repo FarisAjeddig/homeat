@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Home'Eat {% endblock %}</title>
+
+    {% block stylesheets %}{% endblock %}
+    {% stylesheets 'bundles/app/css/*' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+        <link rel="icon" type="image/x-icon" href="#" />
+</head>
+<body>
+{% block header %}
+    <div class="bg-light collapse" id="navbarHeader" style="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 py-4">
+
+                </div>
+                <div class="col-sm-8 offset-md-1 py-8 sizeText2">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="text-decoration: none; color:lightslategray" href="{{ url('admin_users') }}">Les utilisateurs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="text-decoration: none; color:lightslategray" href="{{ url('homepage')}}">Vue des utilisateurs</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <button class="navbar-toggler bg-light" id="AppearNavBar" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse sizeText2" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" style="white-space: nowrap;">
+                    <li class="nav-item active">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('admin_users') }}">Les utilisateurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('homepage')}}">Vue des utilisateurs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br><br><br><br><br><br>
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="row container-fluid" >
+                <div class="col-md-2"></div>
+                <div class="center alert alert-{{ type }} col-md-2">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block footer %}
+    <div class="container-fluid row bg-light" style="padding-top: 2%; padding-bottom: 2%; color: lightslategray; margin-top: 20%;">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-4">
+            Tous droits réservés - Home'Eat 2019
+        </div>
+    </div>
+{% endblock %}
+{% javascripts 'bundles/app/js/*' %}
+    <link href="{{ asset_url }}" type="text/javascript" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        $('#AppearNavBar').click(function(){
+            if ($('#navbarHeader').hasClass("show")) {
+                $('#navbarHeader').removeClass("show")
+            }
+            else {
+                $('#navbarHeader').addClass("show")
+            }
+        })
+    </script>
+{% endjavascripts%}
+</body>
+</html>

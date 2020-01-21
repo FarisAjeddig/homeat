@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{parent()}} - Rechercher un repas{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center">Rechercher un repas</h1>
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10 center">
+        <div class="col-4 offset-4" style="text-align: center">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form(form) }}
+        </div>
+        <br><br><br><br>
+
+        <div class="tab-pane fade show active row" id="list-boeuf" role="tabpanel" aria-labelledby="list-boeuf-list">
+            {% if meals == [] %}
+                <h3 class="col-lg-12" style="text-align: center">Pas de résultats ... Et si vous <a href="{{ url('createMeal') }}">proposiez un repas</a> ?!</h3>
+                <br><br><br>
+            {% endif %}
+            {% for item in meals %}
+                <a href="{{ url('showMeal', {id: item.id}) }}" class="col-xl-3 col-lg-5 col-md-5 col-sm-10 product_content">
+                    <div class="product" style="padding-top: 20px;">
+                        <div>
+                            <img class="product_image" src="{{ asset('uploads/pictures/' ~ item.pictures) }}" alt="{{ asset(item.name) }} - Home'Eat">
+                        </div>
+                        <div class="">
+                            <div class="text-primary">
+                                <h2 style="margin-top:3%; text-align: center"><strong>{{item.name}}</strong></h2>
+                                <p class="card-text red2"><b style="font-size: 3em;">{{item.pricePerPerson}}</b>€</p>
+                                par {{ item.cooker.firstname }}, à {{ item.adress }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    // Using this tutorial for autocomplete address : https://www.youtube.com/watch?v=Rpzp0yCAmq4
+    function activatePlacesSearch(){
+        var options = { componentRestrictions: { country: "fr"} };
+        var input = document.getElementById("form_ville");
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+    }
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuZviasKN0VON99Nz4I8b_tu6YZDcmrsw&libraries=places&callback=activatePlacesSearch&libraries=places"></script>
+
+
+{#    {% for meal in meals %}#}
+{#        {{ dump(meal) }}#}
+{#    {% endfor %}#}
+{% endblock %}

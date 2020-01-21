@@ -1,0 +1,86 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<script>
+    function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+        console.log('statusChangeCallback');
+        console.log(response);                   // The current login status of the person.
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+            testAPI();
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+            console.log("Please log here")
+        }
+    }
+
+
+    function checkLoginState() {               // Called when a person is finished with the Login Button.
+        FB.getLoginStatus(function(response) {   // See the onlogin handler
+            statusChangeCallback(response);
+        });
+    }
+
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '568442063726365',
+            cookie     : true,                     // Enable cookies to allow the server to access the session.
+            xfbml      : true,                     // Parse social plugins on this webpage.
+            version    : 'v5.0'           // Use this Graph API version for this call.
+        });
+
+
+        // FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+        //     statusChangeCallback(response);        // Returns the login status.
+        // });
+    };
+
+
+    (function(d, s, id) {                      // Load the SDK asynchronously
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', {fields: 'email, id, first_name, last_name, middle_name, picture, short_name'}, function(response) {
+            console.log(response);
+        });
+    }
+</script>
+<br><br><br>
+<div class="row container-fluid">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6" style="font-size: 1.1vmax">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+
+            <label for="username">{{ 'Identifiant'|trans }}</label><br>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" autocomplete="username" />
+            <br><br>
+            <label for="password">{{ 'Mot de passe'|trans }}</label>
+            <input type="password" id="password" name="_password" required="required" class="form-control" autocomplete="current-password" />
+            <br><br>
+            <input type="submit" id="_submit" name="_submit" value="{{ 'Connexion'|trans }}" class="form-control btn-primary" />
+        </form>
+    </div>
+</div>
+<br>
+<div class="center">
+    <fb:login-button
+            scope="public_profile, email"
+            onlogin="checkLoginState();">
+    </fb:login-button>
+</div>
+<br>
+<div class="center">
+    ou <a href="{{ url('fos_user_registration_register') }}"> s'inscrire </a>
+</div>

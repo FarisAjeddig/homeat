@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}<br>
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {#{{ form(form) }}#}
+    {{ form_start(form) }}
+
+    {{ form_errors(form) }}
+
+    <div class="container-fluid row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+            <h2 class="center">Dîtes-nous en plus sur vous</h2>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.firstName) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.lastName) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.phoneNumber, { 'attr' : { 'maxlength' : 12, 'minlength' : 10}}) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.adress) }}
+                </div>
+            </div>
+            {{ form_row(form.Enregistrer, {'attr' : {'class' : 'btn-block btn-primary' }}) }}
+            {{ form_end(form) }}
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+    <script>
+        // Using this tutorial for autocomplete address : https://www.youtube.com/watch?v=Rpzp0yCAmq4
+        function activatePlacesSearch(){
+            var options = { componentRestrictions: { country: "fr"} };
+            var input = document.getElementById("form_adress");
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+        }
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuZviasKN0VON99Nz4I8b_tu6YZDcmrsw&libraries=places&callback=activatePlacesSearch&libraries=places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<div class="PlainText">Bonjour {{ user.username }} !<br>
+    <br>
+    Pour valider votre compte utilisateur, merci de vous rendre sur {{ url('api_confirm_registration', {'id': user.getId()}) }}<br>
+    <br>
+    Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.<br>
+    <br>
+    Cordialement,<br>
+    L'équipe<br>
+    <br>
+    <br>
+</div>

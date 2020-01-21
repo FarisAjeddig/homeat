@@ -1,0 +1,185 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+    <div class="container">
+        <div class="row d-flex no-gutters">
+            <div class="col-md-6 col-lg-6 d-flex">
+                <div class="img-about img d-flex align-items-stretch">
+                    <div class="overlay"></div>
+{#                    {% image '@AppBundle/Resources/public/images/about.jpg' %}#}
+                    <div class="img d-flex align-self-stretch align-items-center" style="background-image:url({{ asset('uploads/pictures/') ~ user.picture }}); background-repeat: no-repeat">
+                        <a href="#" style="position: absolute; bottom: 0; background-color: rgba(255,237,221,0.29); width: 100%; margin-bottom: 0; text-align: center; padding-bottom: 5%; padding-top: 5%;" data-toggle="modal" data-target="#modalProfilePicture">
+                            <span href="#" style="color: #FFFFFF !important; font-weight: bold" >Modifier votre photo</span>
+                        </a>
+                    </div>
+{#                    {% endimage %}#}
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 pl-md-5 py-5">
+                <div class="row justify-content-start pb-3">
+                    <div class="col-md-12 heading-section ftco-animate">
+                        <h2 class="mb-4">{{user.firstName}} {{ user.lastName }}</h2>
+                        <p>{{ user.description }}</p>
+                        <ul class="about-info mt-4 px-md-0 px-2">
+                            <li class="d-flex"><span>Ville:</span> <span>{{user.adress}}</span></li>
+                            <li class="d-flex"><span>Âge:</span> <span>23 ans</span></li>
+                            <li class="d-flex"><span>Allergies:</span> <span>{{user.allergy}}</span></li>
+                            <li class="d-flex"><span>Régime:</span> <span>{{user.specialScheme}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="counter-wrap ftco-animate d-flex mt-md-3">
+                    <div class="text">
+                        <p class="mb-4">
+                            <span class="number" data-number="12">0</span>
+                            <span>Repas organisés</span>
+                        </p>
+                        <p class="mb-4">
+                            <span class="number" data-number="4">0</span>
+                            <span>Participations à un repas</span>
+                        </p>
+                        <p>
+                            <a href="#" class="btn btn-primary py-3 px-3">Contacter</a>
+                            {% if app.user.Id == user.Id %}
+                                <a href="{{ url('profileEdit') }}" class="btn btn-dark py-3 px-3">Modifier vos informations</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-no-pb goto-here" id="resume-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <nav id="navi">
+                    <ul>
+                        <li><a href="#page-1">Repas proposés</a></li>
+                        <li><a href="#page-2">Avis</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-9">
+                <div id="page-1" class= "page one">
+                    <h2 class="heading">Repas proposés</h2>
+                    <div class="resume-wrap d-flex ftco-animate">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="flaticon-ideas"></span>
+                        </div>
+                        <div class="text pl-3">
+                            <span class="date">Le 12 janvier 2020</span>
+                            <h2>Filet de veau, crème fraiche et riz</h2>
+                            <span class="position">25€</span>
+                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-2" class= "page two">
+                    <h2 class="heading">Avis</h2>
+                    <div class="resume-wrap d-flex ftco-animate">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="flaticon-ideas"></span>
+                        </div>
+                        <div class="text pl-3">
+                            <span class="date">Octobre 2019</span>
+                            <h2>Waren P.</h2>
+                            <span class="position">Lasagnes au saumon & Tiramisu</span>
+                            <p>Excellent diner passé avec Faris, je recommande !!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-section ftco-project" id="projects-section">
+    <div class="container-fluid px-md-0">
+        <div class="row no-gutters justify-content-center pb-5">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h1 class="big big-2">Projects</h1>
+                <h2 class="mb-4">Autres repas</h2>
+                <p>Proche de vous</p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                {% image '@AppBundle/Resources/public/images/work-1.jpg' %}
+                <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('{{ asset_url }}');">
+                    <div class="overlay"></div>
+                    <div class="text text-center p-4">
+                        <h3><a href="#">Branding &amp; Illustration Design</a></h3>
+                        <span>Web Design</span>
+                    </div>
+                </div>
+                {% endimage %}
+        </div>
+            <div class="col-md-4">
+                {% image '@AppBundle/Resources/public/images/work-2.jpg' %}
+                <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('{{ asset_url }}');">
+                    <div class="overlay"></div>
+                    <div class="text text-center p-4">
+                        <h3><a href="#">Branding &amp; Illustration Design</a></h3>
+                        <span>Web Design</span>
+                    </div>
+                </div>
+                {% endimage %}
+            </div>
+
+            <div class="col-md-4">
+                {% image '@AppBundle/Resources/public/images/work-3.jpg' %}
+                <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('{{ asset_url }}');">
+                    <div class="overlay"></div>
+                    <div class="text text-center p-4">
+                        <h3><a href="#">Branding &amp; Illustration Design</a></h3>
+                        <span>Web Design</span>
+                    </div>
+                </div>
+                {% endimage %}
+            </div>
+            <div class="col-md-4">
+                {% image '@AppBundle/Resources/public/images/work-4.jpg' %}
+                <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('{{ asset_url }}');">
+                    <div class="overlay"></div>
+                    <div class="text text-center p-4">
+                        <h3><a href="#">Branding &amp; Illustration Design</a></h3>
+                        <span>Web Design</span>
+                    </div>
+                </div>
+                {% endimage %}
+            </div>
+            <div class="col-md-4">
+                {% image '@AppBundle/Resources/public/images/work-5.jpg' %}
+                <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('{{ asset_url }}');">
+                    <div class="overlay"></div>
+                    <div class="text text-center p-4">
+                        <h3><a href="#">Branding &amp; Illustration Design</a></h3>
+                        <span>Web Design</span>
+                    </div>
+                </div>
+                {% endimage %}
+            </div>
+            <div class="col-md-4">
+                {% image '@AppBundle/Resources/public/images/work-6.jpg' %}
+                <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url('{{ asset_url }}');">
+                    <div class="overlay"></div>
+                    <div class="text text-center p-4">
+                        <h3><a href="#">Branding &amp; Illustration Design</a></h3>
+                        <span>Web Design</span>
+                    </div>
+                </div>
+                {% endimage %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if app.user.Id == user.Id %}
+    {{ render(controller('AppBundle:Default:addPicture', {userID : app.user.id })) }}
+{% endif %}

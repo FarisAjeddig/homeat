@@ -1,0 +1,87 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Meal:showMeal{% endblock %}
+
+{% block body %}
+    <section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+        <div class="container">
+            <div class="row d-flex no-gutters">
+                <div class="col-md-6 col-lg-6 d-flex">
+                    <div class="img-about img d-flex align-items-stretch">
+                        <div class="overlay"></div>
+                        {#                    {% image '@AppBundle/Resources/public/images/about.jpg' %}#}
+                        <div class="img d-flex align-self-stretch align-items-center fadeInUp ftco-animate" style="background-image:url({{ asset('uploads/pictures/') ~ meal.pictures }}); background-repeat: no-repeat">
+{#                            <a href="#" style="position: absolute; bottom: 0; background-color: rgba(255,237,221,0.29); width: 100%; margin-bottom: 0; text-align: center; padding-bottom: 5%; padding-top: 5%;" data-toggle="modal" data-target="#modalProfilePicture">#}
+{#                                <span href="#" style="color: #FFFFFF !important; font-weight: bold" >Modifier votre photo</span>#}
+{#                            </a>#}
+                        </div>
+                        {#                    {% endimage %}#}
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 pl-md-5 py-5">
+                    <div class="row justify-content-start pb-3">
+                        <div class="col-md-12 heading-section ftco-animate">
+                            <h2 class="mb-4">{{ meal.name }}</h2>
+                            <h3>{{ meal.pricePerPerson }} € par personne</h3>
+                            <ul class="about-info mt-4 px-md-0 px-2">
+                                <li class="d-flex"><span>Cuisine :</span> <span>{{meal.origin}}</span></li>
+                                <li class="d-flex"><span>Ville et date :</span> <span>{{meal.adress}}, le {{ meal.timeEvent | date("d/m/y") }} à {{ meal.timeEvent | date("h:i") }}</span></li>
+                                <li class="d-flex"><span>Places :</span> <span>{{meal.numberPlaces}} places restantes</span></li>
+{#                                <li class="d-flex"><span>Prix/personne :</span> <span>{{ meal.priceperperson }} €</span></li>#}
+                                <li class="d-flex"><p>{% if meal.onTheSpot %} Sur place {% endif %} {% if meal.takeAway %} - À emporter {% endif %} {% if meal.delivery %}- En livraison (+3€) {% endif %}</p></li>
+                                <li>{% if meal.automaticalyAcceptedRequest %}Demandes acceptées automatiquement{% endif %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="counter-wrap ftco-animate d-flex mt-md-3">
+                        <div class="text">
+                            <p class="mb-4">
+                                Organisé par <a href="{{ url('fos_user_profile_show') }}">{{ meal.cooker.firstname }}</a>
+                            </p>
+                            <p>
+                                <a href="#" data-toggle="modal" data-target="#modalOrderMeal" class="btn btn-primary py-3 px-3">Réserver</a>
+                                <a href="#" class="btn btn-dark py-3 px-3">Contacter</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br>
+    <div class="container row">
+        <div class="col-12 offset-lg-4"><h2 class="mb-4 font-weight-bold">Contenu du repas</h2></div>
+    </div>
+    <section id="details-section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-6 col-lg-6 d-flex">
+                    {{ meal.contentMeal |raw }}
+
+                </div>
+                <div class="col-md-6 col-lg-6 pl-md-5 py-5">
+                    <div id="map" style="height: 400px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function initMap() {
+            // The location of Uluru
+            var uluru = {lat: {{ meal.latAdress }}, lng: {{ meal.longAdress }} };
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 4, center: uluru});
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({position: uluru, map: map});
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuZviasKN0VON99Nz4I8b_tu6YZDcmrsw&callback=initMap">
+    </script>
+
+
+    {{ render(controller('AppBundle:Meal:orderMealModal', {mealID : meal.id })) }}
+
+{% endblock %}
